@@ -10,14 +10,14 @@ public class FoodTruckEntity {
     private Long id;
     private String name;
     private String description;
-    private String tag_line;
-    private Long food_truck_establishment_id;
+    private String tagLine;
+    private Long foodTruckEstablishmentId;
     private String website;
     private String photo;
     // location point;
-    private Long created_by;
-    private Date created_date;
-    private Long modified_by;
-    private Date modified_date;
+    private Long createdBy;
+    private Date createdDate;
+    private Long modifiedBy;
+    private Date modifiedDate;
 
 }

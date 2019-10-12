@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class FoodTruckTransformer {
 
     public FoodTruckResource transform(FoodTruckEntity ent){
-        return new FoodTruckResource(ent.getId(),ent.getName(),ent.getDescription(),ent.getTag_line(),ent.getWebsite(),ent.getPhoto(), 0.0, 0.0);
+        return new FoodTruckResource(ent.getId(),ent.getName(),ent.getDescription(),ent.getTagLine(),ent.getWebsite(),ent.getPhoto(), 0.0, 0.0);
     }
 
     public List<FoodTruckResource> transform(List<FoodTruckEntity> entities){

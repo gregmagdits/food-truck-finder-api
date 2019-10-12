@@ -2,6 +2,7 @@ package biz.pagodatech.foodtruckfinder.api.dao;
 
 import biz.pagodatech.foodtruckfinder.api.entity.FoodTruckEntity;
 import lombok.AllArgsConstructor;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -28,6 +29,6 @@ public class FoodTruckDao {
     private JdbcTemplate jdbc;
 
     public List<FoodTruckEntity> getAllFoodTrucks() {
-        return jdbc.queryForList(QUERY_FOOD_TRUCK, FoodTruckEntity.class);
+        return jdbc.query(QUERY_FOOD_TRUCK, new BeanPropertyRowMapper<FoodTruckEntity>(FoodTruckEntity.class));
     }
 }
