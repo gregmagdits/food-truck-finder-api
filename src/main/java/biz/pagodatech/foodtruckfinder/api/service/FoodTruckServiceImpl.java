@@ -18,4 +18,10 @@ public class FoodTruckServiceImpl implements FoodTruckService {
     public List<FoodTruckEntity> getFoodTrucks() {
         return dao.getAllFoodTrucks();
     }
+
+    @Override
+    public FoodTruckEntity getFoodTruckByName(String foodTruckName) {
+        return dao.getFoodTruckByName(foodTruckName);
+    }
+
 }

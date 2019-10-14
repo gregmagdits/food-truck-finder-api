@@ -31,4 +31,10 @@ public class FoodTruckDao {
     public List<FoodTruckEntity> getAllFoodTrucks() {
         return jdbc.query(QUERY_FOOD_TRUCK, new BeanPropertyRowMapper<FoodTruckEntity>(FoodTruckEntity.class));
     }
+
+    public FoodTruckEntity getFoodTruckByName(String foodTruckName) {
+        StringBuilder query = new StringBuilder(QUERY_FOOD_TRUCK);
+        query.append(" WHERE name = ? ");
+        return jdbc.queryForObject(query.toString(), new BeanPropertyRowMapper<FoodTruckEntity>(FoodTruckEntity.class), foodTruckName);
+    }
 }

@@ -7,4 +7,6 @@ import java.util.List;
 public interface FoodTruckService {
     List<FoodTruckEntity> getFoodTrucks();
 
+    FoodTruckEntity getFoodTruckByName(String foodTruckName);
 }
+ 
