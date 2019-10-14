@@ -11,6 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import java.util.Arrays;
 
@@ -18,18 +19,6 @@ import java.util.Arrays;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource(){
-        CorsConfiguration cors = new CorsConfiguration();
-        cors.setAllowedHeaders(Arrays.asList(new String[]{"*"}));
-        cors.setAllowedOrigins(Arrays.asList(new String[]{"*"}));
-        cors.setAllowedMethods(Arrays.asList(new String[]{HttpMethod.GET.name(), HttpMethod.POST.name(), HttpMethod.PUT.name()}));
-        UrlBasedCorsConfigurationSource src = new UrlBasedCorsConfigurationSource();
-        src.registerCorsConfiguration("/**", cors);
-        return src;
-    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
