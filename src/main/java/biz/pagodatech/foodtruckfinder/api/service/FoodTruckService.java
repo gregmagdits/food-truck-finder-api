@@ -2,11 +2,10 @@ package biz.pagodatech.foodtruckfinder.api.service;
 
 import biz.pagodatech.foodtruckfinder.api.entity.FoodTruckEntity;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface FoodTruckService {
-    List<FoodTruckEntity> getFoodTrucks();
+    Collection<FoodTruckEntity> getFoodTrucks();
 
     FoodTruckEntity getFoodTruckByName(String foodTruckName);
 }
- 

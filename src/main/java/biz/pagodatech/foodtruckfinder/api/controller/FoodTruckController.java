@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Optional;
 
 @RestController("/")
@@ -26,9 +26,9 @@ public class FoodTruckController {
 
 
     @GetMapping(path="/", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<List<FoodTruckResource>> getFoodTrucks(@RequestParam Optional<String> foodTruckName){
+    public ResponseEntity<Collection<FoodTruckResource>> getFoodTrucks(@RequestParam Optional<String> foodTruckName){
         log.debug("Getting food trucks!");
-        List<FoodTruckEntity> entities = service.getFoodTrucks();
+        Collection<FoodTruckEntity> entities = service.getFoodTrucks();
         return new  ResponseEntity(transformer.transform(entities), HttpStatus.OK);
     }
     @GetMapping(path="/search", produces = {MediaType.APPLICATION_JSON_VALUE})

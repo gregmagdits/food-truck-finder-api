@@ -1,4 +1,4 @@
-package biz.pagodatech.foodtruckfinder.api.dao;
+package biz.pagodatech.foodtruckfinder.api.jdbc.dao;
 
 import biz.pagodatech.foodtruckfinder.api.entity.FoodTruckEntity;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Deprecated
 @Repository
 @AllArgsConstructor
 public class FoodTruckDao {

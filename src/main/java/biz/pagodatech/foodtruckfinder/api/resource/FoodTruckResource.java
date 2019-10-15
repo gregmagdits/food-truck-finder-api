@@ -4,6 +4,8 @@ package biz.pagodatech.foodtruckfinder.api.resource;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Getter
 public class FoodTruckResource {
@@ -16,4 +18,5 @@ public class FoodTruckResource {
     private final String photo;
     private final double latitude;
     private final double longitude;
+    private final List<FoodTruckFoodItemResource> foodItems;
 }
