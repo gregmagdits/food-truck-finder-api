@@ -14,7 +14,13 @@ public class FoodTruckEMRepository {
     private EntityManager em;
 
     public List<FoodTruckEntity> getFoodTrucks(){
-        EntityGraph entityGraph = em.getEntityGraph("food-truck-with-items-fully-populated");
+        //EntityGraph entityGraph = em.getEntityGraph("food-truck-with-items-fully-populated");
+        EntityGraph<FoodTruckEntity> entityGraph = em.createEntityGraph(FoodTruckEntity.class);
+        // entityGraph.addAttributeNodes("reviews");
+//        entityGraph.addSubgraph("foodItems")
+//                .addAttributeNodes("likes");
+
+
         return em.createQuery("SELECT f FROM FoodTruckEntity f", FoodTruckEntity.class)
                 .setHint("javax.persistence.fetchgraph", entityGraph)
                 .getResultList();

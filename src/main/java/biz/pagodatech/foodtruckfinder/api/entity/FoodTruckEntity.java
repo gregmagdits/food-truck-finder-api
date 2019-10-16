@@ -1,10 +1,11 @@
 package biz.pagodatech.foodtruckfinder.api.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
+@Data
 @NamedEntityGraph(
         name = "food-truck-with-items-fully-populated",
         attributeNodes = {
@@ -20,7 +21,6 @@ import java.util.Set;
                 )
         }
 )
-@Data
 @Entity
 @Table(name="food_truck")
 public class FoodTruckEntity extends  StandardEntity{
@@ -32,10 +32,10 @@ public class FoodTruckEntity extends  StandardEntity{
     private String website;
     private String photo;
     @OneToMany(mappedBy = "foodTruck")
-    //@JoinColumn(name = "FOOD_TRUCK_ID")
+    @EqualsAndHashCode.Exclude
     private Set<FoodTruckFoodItemEntity> foodItems;
     @OneToMany(mappedBy = "foodTruck")
-    //@JoinColumn(name = "FOOD_TRUCK_ID")
+    @EqualsAndHashCode.Exclude
     private Set<FoodTruckReviewEntity> reivews;
 
     // location point;

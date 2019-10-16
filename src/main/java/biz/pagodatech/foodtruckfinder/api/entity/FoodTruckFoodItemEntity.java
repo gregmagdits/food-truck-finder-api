@@ -1,6 +1,6 @@
 package biz.pagodatech.foodtruckfinder.api.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -16,13 +16,14 @@ public class FoodTruckFoodItemEntity extends StandardEntity{
     private BigDecimal price ;
     private String photo ;
     @OneToMany(mappedBy = "foodItem")
-    //@JoinColumn(name="food_truck_food_item_id")
+    @EqualsAndHashCode.Exclude
     private Set<FoodTruckFoodItemLikesEntity> likes;
     @OneToMany(mappedBy = "foodItem")
-    //@JoinColumn(name="food_truck_food_item_id")
+    @EqualsAndHashCode.Exclude
     private Set<FoodTruckFoodItemReviewEntity> reviews;
 
     @ManyToOne
     @JoinColumn(name="food_truck_id")
     private FoodTruckEntity foodTruck;
+
 }
