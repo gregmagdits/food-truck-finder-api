@@ -1,6 +1,7 @@
 package biz.pagodatech.foodtruckfinder.api.service;
 
 import biz.pagodatech.foodtruckfinder.api.entity.FoodTruckEntity;
+import biz.pagodatech.foodtruckfinder.api.jpa.repository.FoodTruckEMRepository;
 import biz.pagodatech.foodtruckfinder.api.jpa.repository.FoodTruckRepository;
 import biz.pagodatech.foodtruckfinder.api.util.Utils;
 import lombok.AllArgsConstructor;
@@ -15,10 +16,11 @@ import java.util.Collection;
 public class FoodTruckServiceImpl implements FoodTruckService {
 
     private FoodTruckRepository repo;
+    private FoodTruckEMRepository emRepository;
     private Utils utils;
     @Override
     public Collection<FoodTruckEntity> getFoodTrucks() {
-        return utils.toCollection(repo.findAll());
+        return emRepository.getFoodTrucks();
     }
 
     @Override

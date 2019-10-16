@@ -2,6 +2,8 @@ package biz.pagodatech.foodtruckfinder.api.transformer;
 
 import biz.pagodatech.foodtruckfinder.api.entity.FoodTruckFoodItemEntity;
 import biz.pagodatech.foodtruckfinder.api.resource.FoodTruckFoodItemResource;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -12,7 +14,13 @@ import java.util.stream.Collectors;
 public class FoodTruckFoodItemTransformer {
 
     public FoodTruckFoodItemResource transform(FoodTruckFoodItemEntity ent){
-        return new FoodTruckFoodItemResource( ent.getId(), ent.getName(), ent.getDescription(), ent.getPrice().doubleValue(), ent.getPhoto());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication!=null ? authentication.getName() : null;
+        FoodTruckFoodItemResource res
+                = new FoodTruckFoodItemResource( ent.getId(), ent.getName(), ent.getDescription(), ent.getPrice().doubleValue(), ent.getPhoto());
+        res.setCanLike(!ent.getLikes().stream().filter(like -> like.getUser().getUsername().equals(currentPrincipalName)).findAny().isPresent());
+        res.setNumberLikes(ent.getLikes().size());
+        return res;
     }
 
     public List<FoodTruckFoodItemResource> transform(Collection<FoodTruckFoodItemEntity> entities){
