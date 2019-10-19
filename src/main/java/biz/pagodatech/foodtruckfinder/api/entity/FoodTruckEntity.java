@@ -33,7 +33,7 @@ public class FoodTruckEntity extends  StandardEntity{
     private String photo;
     @OneToMany(mappedBy = "foodTruck")
     @EqualsAndHashCode.Exclude
-    private Set<FoodTruckFoodItemEntity> foodItems;
+    private Set<FoodItemEntity> foodItems;
     @OneToMany(mappedBy = "foodTruck")
     @EqualsAndHashCode.Exclude
     private Set<FoodTruckReviewEntity> reivews;

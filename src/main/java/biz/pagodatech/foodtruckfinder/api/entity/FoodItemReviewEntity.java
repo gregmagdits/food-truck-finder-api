@@ -9,15 +9,17 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "food_truck_food_item_likes")
-public class FoodTruckFoodItemLikesEntity extends  StandardEntity{
-
-    @ManyToOne
-    @JoinColumn(name="food_item_id")
-    private FoodTruckFoodItemEntity foodItem;
+@Table(name="food_truck_food_item_reviews")
+public class FoodItemReviewEntity extends StandardEntity {
+    private Long  rating;
+    private String review;
 
     @ManyToOne
     @JoinColumn(name="app_user_id")
     private AppUserEntity user;
+
+    @ManyToOne
+    @JoinColumn(name="food_item_id")
+    private FoodItemEntity foodItem;
 
 }

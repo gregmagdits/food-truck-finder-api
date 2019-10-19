@@ -18,6 +18,6 @@ public class FoodTruckResource{
     private final String photo;
     private final double latitude;
     private final double longitude;
-    private final List<FoodTruckFoodItemResource> foodItems;
+    private final List<FoodItemResource> foodItems;
     private final List<FoodTruckReviewResource> reviews;
 }

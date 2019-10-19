@@ -9,7 +9,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class FoodTruckFoodItemResource {
+public class FoodItemResource {
     private final Long id;
     private final String name ;
     private final String description ;
@@ -17,5 +17,5 @@ public class FoodTruckFoodItemResource {
     private final String photo ;
     private int numberLikes;
     private boolean canLike;
-    private final List<FoodTruckFoodItemReviewResource> reviews;
+    private final List<FoodItemReviewResource> reviews;
 }

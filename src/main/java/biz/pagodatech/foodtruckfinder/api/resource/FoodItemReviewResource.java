@@ -9,7 +9,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class FoodTruckFoodItemReviewResource {
+public class FoodItemReviewResource {
     private final Long  rating;
     private final String review;
     private final Date createdDate;

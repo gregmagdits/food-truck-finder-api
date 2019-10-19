@@ -9,7 +9,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name="food_truck_food_item")
-public class FoodTruckFoodItemEntity extends StandardEntity{
+public class FoodItemEntity extends StandardEntity{
 
     private String name ;
     private String description ;
@@ -17,10 +17,10 @@ public class FoodTruckFoodItemEntity extends StandardEntity{
     private String photo ;
     @OneToMany(mappedBy = "foodItem")
     @EqualsAndHashCode.Exclude
-    private Set<FoodTruckFoodItemLikesEntity> likes;
+    private Set<FoodItemLikesEntity> likes;
     @OneToMany(mappedBy = "foodItem")
     @EqualsAndHashCode.Exclude
-    private Set<FoodTruckFoodItemReviewEntity> reviews;
+    private Set<FoodItemReviewEntity> reviews;
 
     @ManyToOne
     @JoinColumn(name="food_truck_id")

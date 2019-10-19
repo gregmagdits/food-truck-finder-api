@@ -1,7 +1,7 @@
 package biz.pagodatech.foodtruckfinder.api.transformer;
 
 import biz.pagodatech.foodtruckfinder.api.entity.FoodTruckEntity;
-import biz.pagodatech.foodtruckfinder.api.resource.FoodTruckFoodItemResource;
+import biz.pagodatech.foodtruckfinder.api.resource.FoodItemResource;
 import biz.pagodatech.foodtruckfinder.api.resource.FoodTruckResource;
 import biz.pagodatech.foodtruckfinder.api.resource.FoodTruckReviewResource;
 import lombok.AllArgsConstructor;
@@ -15,13 +15,13 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class FoodTruckTransformer {
 
-    private FoodTruckFoodItemTransformer foodItemTransformer;
+    private FoodItemTransformer foodItemTransformer;
     private FoodTruckReviewTransformer reviewTransformer;
     //private GenericTransformer t;
 
     public FoodTruckResource transform(FoodTruckEntity ent){
         List<FoodTruckReviewResource> reviews = reviewTransformer.transform(ent.getReivews());
-        List<FoodTruckFoodItemResource> items = foodItemTransformer.transform(ent.getFoodItems());
+        List<FoodItemResource> items = foodItemTransformer.transform(ent.getFoodItems());
         return new FoodTruckResource(ent.getId(),ent.getName(),ent.getDescription(),ent.getTagLine(),ent.getWebsite(),ent.getPhoto(), 0.0, 0.0, items, reviews);
     }
 
