@@ -14,8 +14,8 @@ public class FoodTruckEMRepository {
     private EntityManager em;
 
     public List<FoodTruckEntity> getFoodTrucks(){
-        //EntityGraph entityGraph = em.getEntityGraph("food-truck-with-items-fully-populated");
-        EntityGraph<FoodTruckEntity> entityGraph = em.createEntityGraph(FoodTruckEntity.class);
+        EntityGraph entityGraph = em.getEntityGraph("food-truck-with-items-fully-populated");
+        //EntityGraph<FoodTruckEntity> entityGraph = em.createEntityGraph(FoodTruckEntity.class);
         // entityGraph.addAttributeNodes("reviews");
 //        entityGraph.addSubgraph("foodItems")
 //                .addAttributeNodes("likes");

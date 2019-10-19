@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Getter
 @Setter
@@ -15,4 +17,5 @@ public class FoodTruckFoodItemResource {
     private final String photo ;
     private int numberLikes;
     private boolean canLike;
+    private final List<FoodTruckFoodItemReviewResource> reviews;
 }

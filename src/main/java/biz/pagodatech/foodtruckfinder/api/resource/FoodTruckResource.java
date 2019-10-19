@@ -8,7 +8,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Getter
-public class FoodTruckResource {
+public class FoodTruckResource{
 
     private final Long id;
     private final String name;
@@ -19,4 +19,5 @@ public class FoodTruckResource {
     private final double latitude;
     private final double longitude;
     private final List<FoodTruckFoodItemResource> foodItems;
+    private final List<FoodTruckReviewResource> reviews;
 }
