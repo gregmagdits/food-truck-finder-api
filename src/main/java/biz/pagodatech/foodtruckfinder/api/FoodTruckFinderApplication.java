@@ -1,5 +1,6 @@
 package biz.pagodatech.foodtruckfinder.api;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -13,6 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import java.util.ResourceBundle;
 
 @SpringBootApplication
 @Configuration
@@ -38,5 +40,10 @@ public class FoodTruckFinderApplication {
     @Bean
     public JdbcTemplate jdbcTemplate(DataSource ds){
         return new JdbcTemplate(ds);
+    }
+
+    @Bean("errors")
+    public ResourceBundle errors(@Value("messages.errors") String errorsBundle){
+        return ResourceBundle.getBundle(errorsBundle);
     }
 }
