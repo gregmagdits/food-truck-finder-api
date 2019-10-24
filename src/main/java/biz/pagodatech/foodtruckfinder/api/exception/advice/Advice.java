@@ -1,5 +1,6 @@
 package biz.pagodatech.foodtruckfinder.api.exception.advice;
 
+import biz.pagodatech.foodtruckfinder.api.exception.FoodItemNotFoundException;
 import biz.pagodatech.foodtruckfinder.api.exception.FoodTruckNotFoundException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,4 +23,11 @@ public class Advice {
         String message = MessageFormat.format(errors.getString("foodtruck.notfound"), e.getFoodTruckName());
         return new ResponseEntity<>(new ErrorResponse(message), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(value = FoodItemNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handle(FoodItemNotFoundException e) {
+        String message = MessageFormat.format(errors.getString("fooditem.notfound"), e.getFoodItemId());
+        return new ResponseEntity<>(new ErrorResponse(message), HttpStatus.NOT_FOUND);
+    }
+
 }

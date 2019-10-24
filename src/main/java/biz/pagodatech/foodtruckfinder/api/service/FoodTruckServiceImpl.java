@@ -2,6 +2,9 @@ package biz.pagodatech.foodtruckfinder.api.service;
 
 import biz.pagodatech.foodtruckfinder.api.entity.FoodItemEntity;
 import biz.pagodatech.foodtruckfinder.api.entity.FoodTruckEntity;
+import biz.pagodatech.foodtruckfinder.api.exception.FoodItemNotFoundException;
+import biz.pagodatech.foodtruckfinder.api.exception.FoodTruckNotFoundException;
+import biz.pagodatech.foodtruckfinder.api.jpa.repository.FoodItemRepository;
 import biz.pagodatech.foodtruckfinder.api.jpa.repository.FoodTruckEMRepository;
 import biz.pagodatech.foodtruckfinder.api.jpa.repository.FoodTruckRepository;
 import biz.pagodatech.foodtruckfinder.api.resource.FoodItemReviewResource;
@@ -11,9 +14,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -21,6 +25,7 @@ import java.util.Collection;
 public class FoodTruckServiceImpl implements FoodTruckService {
 
     private FoodTruckRepository repo;
+    private FoodItemRepository itemRepository;
     private FoodTruckEMRepository emRepository;
     private CollectionUtils utils;
     @Override
@@ -35,25 +40,39 @@ public class FoodTruckServiceImpl implements FoodTruckService {
 
     @Override
     public void createFoodTruckReview(User user, String foodTruckName, FoodTruckReviewResource review) {
-        throw new NotImplementedException();
-    }
-    @Override
-    public void createFoodItemReview(User user, String foodTruckName, Long foodItemId, FoodItemReviewResource review) {
-        throw new NotImplementedException();
+        emRepository.createFoodTruckReview(user, getFoodTruckByNameHelper(foodTruckName), review.getRating(), review.getReview());
     }
 
     @Override
-    public void addFoodItemLike(User user, String foodTruckName, Long foodItemId) {
-        throw new NotImplementedException();
+    public void createFoodItemReview(User user, Long foodItemId, FoodItemReviewResource review) {
+        emRepository.createFoodItemReview(user, getFoodItemHelper(foodItemId), review.getRating(), review.getReview());
+    }
+
+    @Override
+    public void addFoodItemLike(User user, Long foodItemId) {
+        emRepository.createFoodItemLike(user, getFoodItemHelper(foodItemId));
     }
 
     @Override
     public void addFoodTruckLike(User user, String foodTruckName) {
-        throw new NotImplementedException();
+        emRepository.createFoodTruckLike(user, getFoodTruckByNameHelper(foodTruckName));
     }
 
     @Override
     public FoodItemEntity getFoodItem(Long foodItemId) {
-        throw new NotImplementedException();
+        return getFoodItemHelper(foodItemId);
+    }
+
+    private FoodTruckEntity getFoodTruckByNameHelper(String foodTruckName){
+        List<FoodTruckEntity> results = repo.findByName(foodTruckName);
+        if (org.apache.commons.collections4.CollectionUtils.isEmpty(results)){
+            throw new FoodTruckNotFoundException(foodTruckName);
+        }
+        return results.get(0);
+    }
+
+    private FoodItemEntity getFoodItemHelper(Long foodItemId){
+        Optional<FoodItemEntity> entity = itemRepository.findById(foodItemId);
+        return entity.orElseThrow(()-> new FoodItemNotFoundException(foodItemId));
     }
 }

@@ -15,9 +15,9 @@ public interface FoodTruckService {
 
     void createFoodTruckReview(User user, String foodTruckName, FoodTruckReviewResource review);
 
-    void createFoodItemReview(User user, String foodTruckName, Long foodItemId, FoodItemReviewResource review);
+    void createFoodItemReview(User user, Long foodItemId, FoodItemReviewResource review);
 
-    void addFoodItemLike(User user, String foodTruckName, Long foodItemId);
+    void addFoodItemLike(User user, Long foodItemId);
 
     void addFoodTruckLike(User user, String foodTruckName);
 

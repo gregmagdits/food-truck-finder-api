@@ -77,13 +77,12 @@ public class FoodTruckController {
     @PostMapping(path="/food-trucks/:foodTruckName/food-items/:foodItemId/reviews", produces = {MediaType.APPLICATION_JSON_VALUE})
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<FoodItemResource> addFoodItemReview(
-            @PathParam("foodTruckName") String foodTruckName,
             @PathParam("foodItemId") Long foodItemId,
             @AuthenticationPrincipal User user,
             @RequestBody @Valid FoodItemReviewResource review
     ){
         log.debug("Creating a food item review!");
-        service.createFoodItemReview(user, foodTruckName, foodItemId, review);
+        service.createFoodItemReview(user, foodItemId, review);
         FoodItemEntity entity = service.getFoodItem(foodItemId);
         return new  ResponseEntity(foodItemTransformer.transform(entity), HttpStatus.OK);
     }
@@ -97,7 +96,7 @@ public class FoodTruckController {
             @RequestBody @Valid FoodItemReviewResource review
     ){
         log.debug("Creating a food item like!");
-        service.addFoodItemLike(user, foodTruckName, foodItemId);
+        service.addFoodItemLike(user, foodItemId);
         FoodItemEntity entity = service.getFoodItem(foodItemId);
         return new  ResponseEntity(foodItemTransformer.transform(entity), HttpStatus.OK);
     }
