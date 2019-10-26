@@ -10,6 +10,7 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name="food_truck_food_item_reviews")
+@AllArgsConstructor
 public class FoodItemReviewEntity extends StandardEntity {
     private Long  rating;
     private String review;
