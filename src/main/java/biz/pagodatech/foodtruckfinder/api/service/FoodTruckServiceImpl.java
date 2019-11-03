@@ -1,5 +1,6 @@
 package biz.pagodatech.foodtruckfinder.api.service;
 
+import biz.pagodatech.foodtruckfinder.api.auth.AppUserPrincipal;
 import biz.pagodatech.foodtruckfinder.api.entity.FoodItemEntity;
 import biz.pagodatech.foodtruckfinder.api.entity.FoodTruckEntity;
 import biz.pagodatech.foodtruckfinder.api.exception.FoodItemNotFoundException;
@@ -11,7 +12,6 @@ import biz.pagodatech.foodtruckfinder.api.resource.FoodItemReviewResource;
 import biz.pagodatech.foodtruckfinder.api.resource.FoodTruckReviewResource;
 import biz.pagodatech.foodtruckfinder.api.util.CollectionUtils;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,22 +39,22 @@ public class FoodTruckServiceImpl implements FoodTruckService {
     }
 
     @Override
-    public void createFoodTruckReview(User user, String foodTruckName, FoodTruckReviewResource review) {
+    public void createFoodTruckReview(AppUserPrincipal user, String foodTruckName, FoodTruckReviewResource review) {
         emRepository.createFoodTruckReview(user, getFoodTruckByNameHelper(foodTruckName), review.getRating(), review.getReview());
     }
 
     @Override
-    public void createFoodItemReview(User user, Long foodItemId, FoodItemReviewResource review) {
+    public void createFoodItemReview(AppUserPrincipal user, Long foodItemId, FoodItemReviewResource review) {
         emRepository.createFoodItemReview(user, getFoodItemHelper(foodItemId), review.getRating(), review.getReview());
     }
 
     @Override
-    public void addFoodItemLike(User user, Long foodItemId) {
+    public void addFoodItemLike(AppUserPrincipal user, Long foodItemId) {
         emRepository.createFoodItemLike(user, getFoodItemHelper(foodItemId));
     }
 
     @Override
-    public void addFoodTruckLike(User user, String foodTruckName) {
+    public void addFoodTruckLike(AppUserPrincipal user, String foodTruckName) {
         emRepository.createFoodTruckLike(user, getFoodTruckByNameHelper(foodTruckName));
     }
 

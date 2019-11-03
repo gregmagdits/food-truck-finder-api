@@ -1,5 +1,6 @@
 package biz.pagodatech.foodtruckfinder.api.exception.advice;
 
+import biz.pagodatech.foodtruckfinder.api.exception.AppUserNotFoundException;
 import biz.pagodatech.foodtruckfinder.api.exception.FoodItemNotFoundException;
 import biz.pagodatech.foodtruckfinder.api.exception.FoodTruckNotFoundException;
 import lombok.extern.log4j.Log4j2;
@@ -29,5 +30,9 @@ public class Advice {
         String message = MessageFormat.format(errors.getString("fooditem.notfound"), e.getFoodItemId());
         return new ResponseEntity<>(new ErrorResponse(message), HttpStatus.NOT_FOUND);
     }
-
+    @ExceptionHandler(value = AppUserNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handle(AppUserNotFoundException e) {
+        String message = MessageFormat.format(errors.getString("appuser.notfound"), e.getUsername());
+        return new ResponseEntity<>(new ErrorResponse(message), HttpStatus.NOT_FOUND);
+    }
 }

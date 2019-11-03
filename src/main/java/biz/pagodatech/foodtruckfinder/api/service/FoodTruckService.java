@@ -1,10 +1,10 @@
 package biz.pagodatech.foodtruckfinder.api.service;
 
+import biz.pagodatech.foodtruckfinder.api.auth.AppUserPrincipal;
 import biz.pagodatech.foodtruckfinder.api.entity.FoodItemEntity;
 import biz.pagodatech.foodtruckfinder.api.entity.FoodTruckEntity;
 import biz.pagodatech.foodtruckfinder.api.resource.FoodItemReviewResource;
 import biz.pagodatech.foodtruckfinder.api.resource.FoodTruckReviewResource;
-import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
 
@@ -13,13 +13,13 @@ public interface FoodTruckService {
 
     FoodTruckEntity getFoodTruckByName(String foodTruckName);
 
-    void createFoodTruckReview(User user, String foodTruckName, FoodTruckReviewResource review);
+    void createFoodTruckReview(AppUserPrincipal user, String foodTruckName, FoodTruckReviewResource review);
 
-    void createFoodItemReview(User user, Long foodItemId, FoodItemReviewResource review);
+    void createFoodItemReview(AppUserPrincipal user, Long foodItemId, FoodItemReviewResource review);
 
-    void addFoodItemLike(User user, Long foodItemId);
+    void addFoodItemLike(AppUserPrincipal user, Long foodItemId);
 
-    void addFoodTruckLike(User user, String foodTruckName);
+    void addFoodTruckLike(AppUserPrincipal user, String foodTruckName);
 
     FoodItemEntity getFoodItem(Long foodItemId);
 }

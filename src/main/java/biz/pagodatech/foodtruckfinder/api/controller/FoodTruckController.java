@@ -1,5 +1,6 @@
 package biz.pagodatech.foodtruckfinder.api.controller;
 
+import biz.pagodatech.foodtruckfinder.api.auth.AppUserPrincipal;
 import biz.pagodatech.foodtruckfinder.api.entity.FoodItemEntity;
 import biz.pagodatech.foodtruckfinder.api.entity.FoodTruckEntity;
 import biz.pagodatech.foodtruckfinder.api.resource.FoodItemResource;
@@ -17,7 +18,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
@@ -51,7 +56,7 @@ public class FoodTruckController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<FoodTruckResource> addFoodTruckReview(
             @PathParam("foodTruckName") String foodTruckName,
-            @AuthenticationPrincipal User user,
+            @AuthenticationPrincipal AppUserPrincipal user,
             @RequestBody @Valid FoodTruckReviewResource review
     ){
         log.debug("Creating a food truck review!");
@@ -64,7 +69,7 @@ public class FoodTruckController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<FoodTruckResource> addFoodTruckLike(
             @PathParam("foodTruckName") String foodTruckName,
-            @AuthenticationPrincipal User user,
+            @AuthenticationPrincipal AppUserPrincipal user,
             @RequestBody @Valid FoodItemReviewResource review
     ){
         log.debug("Creating a food item like!");
@@ -78,7 +83,7 @@ public class FoodTruckController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<FoodItemResource> addFoodItemReview(
             @PathParam("foodItemId") Long foodItemId,
-            @AuthenticationPrincipal User user,
+            @AuthenticationPrincipal AppUserPrincipal user,
             @RequestBody @Valid FoodItemReviewResource review
     ){
         log.debug("Creating a food item review!");
@@ -92,7 +97,7 @@ public class FoodTruckController {
     public ResponseEntity<FoodItemResource> addFoodItemLike(
             @PathParam("foodTruckName") String foodTruckName,
             @PathParam("foodItemId") Long foodItemId,
-            @AuthenticationPrincipal User user,
+            @AuthenticationPrincipal AppUserPrincipal user,
             @RequestBody @Valid FoodItemReviewResource review
     ){
         log.debug("Creating a food item like!");
