@@ -3,6 +3,7 @@ package biz.pagodatech.foodtruckfinder.api.exception.advice;
 import biz.pagodatech.foodtruckfinder.api.exception.AppUserNotFoundException;
 import biz.pagodatech.foodtruckfinder.api.exception.FoodItemNotFoundException;
 import biz.pagodatech.foodtruckfinder.api.exception.FoodTruckNotFoundException;
+import biz.pagodatech.foodtruckfinder.api.exception.InvalidOrExpiredJWTToken;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -34,5 +35,11 @@ public class Advice {
     public ResponseEntity<ErrorResponse> handle(AppUserNotFoundException e) {
         String message = MessageFormat.format(errors.getString("appuser.notfound"), e.getUsername());
         return new ResponseEntity<>(new ErrorResponse(message), HttpStatus.NOT_FOUND);
+    }
+    //InvalidOrExpiredJWTToken
+    @ExceptionHandler(value = InvalidOrExpiredJWTToken.class)
+    public ResponseEntity<ErrorResponse> handle(InvalidOrExpiredJWTToken e) {
+        String message = errors.getString("jwt.invalid");
+        return new ResponseEntity<>(new ErrorResponse(message), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

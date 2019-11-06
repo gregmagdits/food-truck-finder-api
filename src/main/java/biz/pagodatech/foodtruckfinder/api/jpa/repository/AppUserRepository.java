@@ -5,4 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.QueryByExampleExecutor;
 
 public interface AppUserRepository extends CrudRepository<AppUserEntity, Long>, QueryByExampleExecutor<AppUserEntity> {
+    public AppUserEntity findByUsername(String username);
 }

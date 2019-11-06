@@ -2,6 +2,7 @@ package biz.pagodatech.foodtruckfinder.api.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -12,6 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="food_truck_reviews")
 @AllArgsConstructor
+@NoArgsConstructor
 public class FoodTruckReviewEntity extends  StandardEntity{
     private Long  rating;
     private String review;

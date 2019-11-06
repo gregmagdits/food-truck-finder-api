@@ -2,6 +2,7 @@ package biz.pagodatech.foodtruckfinder.api.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -12,7 +13,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "food_truck_likes")
 @AllArgsConstructor
-public class FoodTruckLikesEntity {
+@NoArgsConstructor
+public class FoodTruckLikesEntity extends  StandardEntity {
 
     @ManyToOne
     @JoinColumn(name="food_truck_id")
@@ -21,4 +23,5 @@ public class FoodTruckLikesEntity {
     @ManyToOne
     @JoinColumn(name="app_user_id")
     private AppUserEntity user;
+
 }

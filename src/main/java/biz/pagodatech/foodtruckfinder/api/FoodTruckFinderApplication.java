@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -20,7 +21,10 @@ import java.util.ResourceBundle;
 @Configuration
 @EntityScan({"biz.pagodatech.foodtruckfinder.api.entity"})
 @ComponentScan({"biz.pagodatech.foodtruckfinder.api.**"})
-@PropertySource("classpath:db.properties")
+@PropertySources({
+        @PropertySource("classpath:db.properties"),
+        @PropertySource("classpath:cognito.properties"),
+})
 @EnableTransactionManagement
 public class FoodTruckFinderApplication {
 

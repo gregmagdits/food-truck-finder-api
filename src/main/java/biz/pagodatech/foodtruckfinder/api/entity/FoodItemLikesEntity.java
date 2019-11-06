@@ -11,6 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "food_truck_food_item_likes")
 @AllArgsConstructor
+@NoArgsConstructor
 public class FoodItemLikesEntity extends  StandardEntity{
 
     @ManyToOne

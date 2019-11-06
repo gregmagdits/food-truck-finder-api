@@ -33,3 +33,4 @@ build/
 ### Maven stuff ###
 .mvn/
 src/main/resources/db.properties
+src/main/resources/cognito.properties
