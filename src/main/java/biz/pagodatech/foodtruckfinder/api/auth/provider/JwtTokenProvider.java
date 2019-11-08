@@ -1,5 +1,6 @@
 package biz.pagodatech.foodtruckfinder.api.auth.provider;
 
+import biz.pagodatech.foodtruckfinder.api.auth.CognitoPrincipal;
 import biz.pagodatech.foodtruckfinder.api.exception.InvalidOrExpiredJWTToken;
 import com.auth0.jwk.JwkProvider;
 import com.auth0.jwk.UrlJwkProvider;
@@ -38,7 +39,7 @@ public class JwtTokenProvider {
                 .credentialsExpired(false)
                 .disabled(false)
                 .build();
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(new CognitoPrincipal(userDetails), "", userDetails.getAuthorities());
     }
 
     public String resolveToken(HttpServletRequest req) {

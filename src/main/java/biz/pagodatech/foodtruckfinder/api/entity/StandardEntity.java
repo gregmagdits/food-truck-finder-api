@@ -10,18 +10,16 @@ import java.util.Date;
 @MappedSuperclass
 public abstract class StandardEntity {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude
     private Long id;
-    @ManyToOne
-    @JoinColumn(name="created_by")
+    @Column(name="created_by")
     @EqualsAndHashCode.Exclude
-    private AppUserEntity createdBy;
+    private String createdBy;
     private Date createdDate;
-    @ManyToOne
-    @JoinColumn(name="modified_by")
+    @Column(name="modified_by")
     @EqualsAndHashCode.Exclude
-    private AppUserEntity modifiedBy;
+    private String modifiedBy;
     private Date modifiedDate;
 
 }

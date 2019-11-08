@@ -25,7 +25,7 @@ public class FoodItemTransformer {
         List<FoodItemReviewResource> reviews = ent.getReviews().stream().map(transformer::transform).collect(Collectors.toList());
         FoodItemResource res
                 = new FoodItemResource( ent.getId(), ent.getName(), ent.getDescription(), ent.getPrice().doubleValue(), ent.getPhoto(), reviews);
-        res.setCanLike(!ent.getLikes().stream().filter(like -> like.getUser().getUsername().equals(currentPrincipalName)).findAny().isPresent());
+        res.setCanLike(!ent.getLikes().stream().filter(like -> like.getUser().equals(currentPrincipalName)).findAny().isPresent());
         res.setNumberLikes(ent.getLikes().size());
         return res;
     }

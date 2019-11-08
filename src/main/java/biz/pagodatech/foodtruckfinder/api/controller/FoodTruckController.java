@@ -1,5 +1,6 @@
 package biz.pagodatech.foodtruckfinder.api.controller;
 
+import biz.pagodatech.foodtruckfinder.api.auth.CognitoPrincipal;
 import biz.pagodatech.foodtruckfinder.api.entity.FoodItemEntity;
 import biz.pagodatech.foodtruckfinder.api.entity.FoodTruckEntity;
 import biz.pagodatech.foodtruckfinder.api.resource.FoodItemResource;
@@ -16,7 +17,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,7 +55,7 @@ public class FoodTruckController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<FoodTruckResource> addFoodTruckReview(
             @PathVariable("foodTruckName") String foodTruckName,
-            @AuthenticationPrincipal UserDetails user,
+            @AuthenticationPrincipal CognitoPrincipal user,
             @RequestBody @Valid FoodTruckReviewResource review
     ){
         log.debug("Creating a food truck review!");
@@ -68,7 +68,7 @@ public class FoodTruckController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<FoodTruckResource> addFoodTruckLike(
             @PathVariable("foodTruckName") String foodTruckName,
-            @AuthenticationPrincipal UserDetails user,
+            @AuthenticationPrincipal CognitoPrincipal user,
             @RequestBody @Valid FoodItemReviewResource review
     ){
         log.debug("Creating a food item like!");
@@ -82,7 +82,7 @@ public class FoodTruckController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<FoodItemResource> addFoodItemReview(
             @PathVariable("foodItemId") Long foodItemId,
-            @AuthenticationPrincipal UserDetails user,
+            @AuthenticationPrincipal CognitoPrincipal user,
             @RequestBody @Valid FoodItemReviewResource review
     ){
         log.debug("Creating a food item review!");
@@ -96,7 +96,7 @@ public class FoodTruckController {
     public ResponseEntity<FoodItemResource> addFoodItemLike(
             @PathVariable("foodTruckName") String foodTruckName,
             @PathVariable("foodItemId") Long foodItemId,
-            @AuthenticationPrincipal UserDetails user,
+            @AuthenticationPrincipal CognitoPrincipal user,
             @RequestBody @Valid FoodItemReviewResource review
     ){
         log.debug("Creating a food item like!");

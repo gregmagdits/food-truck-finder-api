@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,8 +21,7 @@ public class FoodTruckLikesEntity extends  StandardEntity {
     @JoinColumn(name="food_truck_id")
     private FoodTruckEntity foodTruck;
 
-    @ManyToOne
-    @JoinColumn(name="app_user_id")
-    private AppUserEntity user;
+    @Column(name="app_user")
+    private String user;
 
 }

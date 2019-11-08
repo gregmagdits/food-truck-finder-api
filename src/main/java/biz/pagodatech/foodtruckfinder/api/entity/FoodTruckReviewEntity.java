@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,9 +19,8 @@ public class FoodTruckReviewEntity extends  StandardEntity{
     private Long  rating;
     private String review;
 
-    @ManyToOne
-    @JoinColumn(name="app_user_id")
-    private AppUserEntity user;
+    @Column(name="app_user")
+    private String user;
 
     @ManyToOne
     @JoinColumn(name="food_truck_id")
