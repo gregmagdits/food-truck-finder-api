@@ -17,7 +17,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,7 +51,7 @@ public class FoodTruckController {
         return new  ResponseEntity(transformer.transform(entity), HttpStatus.OK);
     }
 
-    @PostMapping(path="/food-trucks/:foodTruckName/reviews", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(path="/food-trucks/{foodTruckName}/reviews", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<FoodTruckResource> addFoodTruckReview(
             @PathParam("foodTruckName") String foodTruckName,

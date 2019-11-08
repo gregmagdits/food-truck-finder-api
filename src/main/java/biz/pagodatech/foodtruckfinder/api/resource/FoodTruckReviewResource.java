@@ -1,22 +1,31 @@
 package biz.pagodatech.foodtruckfinder.api.resource;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class FoodTruckReviewResource {
 
+    @JsonProperty("rating")
     @NotNull
-    private final Long  rating;
+    private  Long  rating;
+
+    @JsonProperty("review")
     @NotBlank
-    private final String review;
-    private final Date createdDate;
+    private  String review;
+
+    @JsonProperty("created_date")
+    private  Date createdDate;
+
 }
