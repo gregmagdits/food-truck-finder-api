@@ -1,6 +1,5 @@
 package biz.pagodatech.foodtruckfinder.api.jpa.repository;
 
-import biz.pagodatech.foodtruckfinder.api.auth.AppUserPrincipal;
 import biz.pagodatech.foodtruckfinder.api.entity.AppUserEntity;
 import biz.pagodatech.foodtruckfinder.api.entity.FoodItemEntity;
 import biz.pagodatech.foodtruckfinder.api.entity.FoodItemLikesEntity;
@@ -11,6 +10,7 @@ import biz.pagodatech.foodtruckfinder.api.entity.FoodTruckReviewEntity;
 import biz.pagodatech.foodtruckfinder.api.exception.AppUserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Example;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityGraph;
@@ -39,25 +39,25 @@ public class FoodTruckEMRepository {
         return optional.orElseThrow(() -> new AppUserNotFoundException(username));
     }
 
-    public void createFoodTruckReview(AppUserPrincipal principal, FoodTruckEntity truckEntity, Long rating, String review) {
+    public void createFoodTruckReview(UserDetails principal, FoodTruckEntity truckEntity, Long rating, String review) {
         AppUserEntity user = getAppUserByUsername(principal.getUsername());
         FoodTruckReviewEntity e = new FoodTruckReviewEntity(rating, review, user, truckEntity);
         em.persist(e);
     }
 
-    public void createFoodItemReview(AppUserPrincipal principal, FoodItemEntity foodItemEntity, Long rating, String review) {
+    public void createFoodItemReview(UserDetails principal, FoodItemEntity foodItemEntity, Long rating, String review) {
         AppUserEntity user = getAppUserByUsername(principal.getUsername());
         FoodItemReviewEntity e = new FoodItemReviewEntity(rating, review, user, foodItemEntity);
         em.persist(e);
     }
 
-    public void createFoodItemLike(AppUserPrincipal principal, FoodItemEntity foodItemEntity) {
+    public void createFoodItemLike(UserDetails principal, FoodItemEntity foodItemEntity) {
         AppUserEntity user = getAppUserByUsername(principal.getUsername());
         FoodItemLikesEntity e = new FoodItemLikesEntity(foodItemEntity, user);
         em.persist(e);
     }
 
-    public void createFoodTruckLike(AppUserPrincipal principal, FoodTruckEntity foodTruckEntity) {
+    public void createFoodTruckLike(UserDetails principal, FoodTruckEntity foodTruckEntity) {
         AppUserEntity user = getAppUserByUsername(principal.getUsername());
         FoodTruckLikesEntity e = new FoodTruckLikesEntity(foodTruckEntity, user);
         em.persist(e);

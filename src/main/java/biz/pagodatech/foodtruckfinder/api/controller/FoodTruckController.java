@@ -1,6 +1,5 @@
 package biz.pagodatech.foodtruckfinder.api.controller;
 
-import biz.pagodatech.foodtruckfinder.api.auth.AppUserPrincipal;
 import biz.pagodatech.foodtruckfinder.api.entity.FoodItemEntity;
 import biz.pagodatech.foodtruckfinder.api.entity.FoodTruckEntity;
 import biz.pagodatech.foodtruckfinder.api.resource.FoodItemResource;
@@ -17,14 +16,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -54,8 +54,8 @@ public class FoodTruckController {
     @PostMapping(path="/food-trucks/{foodTruckName}/reviews", produces = {MediaType.APPLICATION_JSON_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE})
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<FoodTruckResource> addFoodTruckReview(
-            @PathParam("foodTruckName") String foodTruckName,
-            @AuthenticationPrincipal AppUserPrincipal user,
+            @PathVariable("foodTruckName") String foodTruckName,
+            @AuthenticationPrincipal UserDetails user,
             @RequestBody @Valid FoodTruckReviewResource review
     ){
         log.debug("Creating a food truck review!");
@@ -67,8 +67,8 @@ public class FoodTruckController {
     @PostMapping(path="/food-trucks/:foodTruckName/likes", produces = {MediaType.APPLICATION_JSON_VALUE})
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<FoodTruckResource> addFoodTruckLike(
-            @PathParam("foodTruckName") String foodTruckName,
-            @AuthenticationPrincipal AppUserPrincipal user,
+            @PathVariable("foodTruckName") String foodTruckName,
+            @AuthenticationPrincipal UserDetails user,
             @RequestBody @Valid FoodItemReviewResource review
     ){
         log.debug("Creating a food item like!");
@@ -81,8 +81,8 @@ public class FoodTruckController {
     @PostMapping(path="/food-trucks/:foodTruckName/food-items/:foodItemId/reviews", produces = {MediaType.APPLICATION_JSON_VALUE})
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<FoodItemResource> addFoodItemReview(
-            @PathParam("foodItemId") Long foodItemId,
-            @AuthenticationPrincipal AppUserPrincipal user,
+            @PathVariable("foodItemId") Long foodItemId,
+            @AuthenticationPrincipal UserDetails user,
             @RequestBody @Valid FoodItemReviewResource review
     ){
         log.debug("Creating a food item review!");
@@ -94,9 +94,9 @@ public class FoodTruckController {
     @PostMapping(path="/food-trucks/:foodTruckName/food-items/:foodItemId/likes", produces = {MediaType.APPLICATION_JSON_VALUE})
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<FoodItemResource> addFoodItemLike(
-            @PathParam("foodTruckName") String foodTruckName,
-            @PathParam("foodItemId") Long foodItemId,
-            @AuthenticationPrincipal AppUserPrincipal user,
+            @PathVariable("foodTruckName") String foodTruckName,
+            @PathVariable("foodItemId") Long foodItemId,
+            @AuthenticationPrincipal UserDetails user,
             @RequestBody @Valid FoodItemReviewResource review
     ){
         log.debug("Creating a food item like!");

@@ -1,8 +1,5 @@
 package biz.pagodatech.foodtruckfinder.api.conf;
 
-import biz.pagodatech.foodtruckfinder.api.auth.JwtTokenProvider;
-import biz.pagodatech.foodtruckfinder.api.auth.provider.JWTAuthenticationProvider;
-import biz.pagodatech.foodtruckfinder.api.filter.JwtTokenFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,11 +19,6 @@ import java.util.Arrays;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    //JWTAuthenticationFilter jwtFilter;
-    //private JWTAuthenticationProvider customAuthProvider;
-    private JwtTokenProvider jwtTokenProvider;
-    private JwtTokenFilter jwtFilter;
-    private JWTAuthenticationProvider jwtAuthenticationProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -34,25 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests().antMatchers("/**").permitAll();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        // Apply JWT
-        //http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
-        //http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-        http.authenticationProvider(jwtAuthenticationProvider);
-        //THis is one way to do it
-//                .and()
-//                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
-//                .addFilter(new JWTAuthorizationFilter(authenticationManager()));
     }
-
-//    @Override
-//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(customAuthProvider);
-////        auth.inMemoryAuthentication()
-////                .withUser("memuser")
-////                .password(encoder().encode("pass"))
-////                .roles("USER");
-//    }
 
     //KEEP CORS disabled for now
     @Bean
@@ -66,5 +40,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
 }
